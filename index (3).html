@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MANTOVA SWAG // Feste Leggendarie</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border-radius: 0px !important; }
+
+  body {
+    background-color: #E8DCC4;
+    color: #2B1E14;
+    font-family: "Verdana", "Geneva", "Trebuchet MS", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  a { color: #556B2F; text-decoration: underline; }
+  a:hover { color: #D4A373; background: #2B1E14; text-decoration: none; }
+
+  .page-wrap {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* ========== TICKER ========== */
+  #ticker-bar {
+    background: #4A3525;
+    color: #D4A373;
+    font-family: "Verdana", monospace;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 3px solid #556B2F;
+  }
+  #ticker-inner {
+    display: inline-block;
+    animation: ticker-scroll 28s linear infinite;
+  }
+  @keyframes ticker-scroll {
+    0%   { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+  }
+
+  /* ========== HEADER ========== */
+  header {
+    background: #4A3525;
+    color: #E8DCC4;
+    padding: 32px 0 24px;
+    border-bottom: 4px solid #556B2F;
+  }
+  header .page-wrap { position: relative; }
+
+  .header-tag {
+    display: inline-block;
+    background: #556B2F;
+    color: #E8DCC4;
+    font-size: 11px;
+    font-family: "Verdana", sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 2px solid #D4A373;
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    letter-spacing: -2px;
+    line-height: 0.92;
+    color: #D4A373;
+    text-transform: uppercase;
+    text-shadow: 5px 5px 0px #2B1E14;
+    margin-bottom: 16px;
+  }
+  h1 span { color: #E8DCC4; }
+
+  .subheader {
+    font-family: "Verdana", sans-serif;
+    font-size: 13px;
+    color: #D4A373;
+    max-width: 640px;
+    border-left: 4px solid #6A8296;
+    padding-left: 14px;
+    margin-top: 10px;
+  }
+
+  /* LIVE STATS BAR */
+  .live-bar {
+    display: flex;
+    gap: 0;
+    margin-top: 22px;
+    border: 3px solid #D4A373;
+    box-shadow: 5px 5px 0px #2B1E14;
+    overflow: hidden;
+  }
+  .live-stat {
+    flex: 1;
+    background: #2B1E14;
+    color: #D4A373;
+    padding: 10px 14px;
+    border-right: 2px solid #D4A373;
+    font-family: "Verdana", monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .live-stat:last-child { border-right: none; }
+  .live-stat .val {
+    display: block;
+    font-size: 22px;
+    font-family: "Impact", "Arial Black", sans-serif;
+    color: #E8DCC4;
+    letter-spacing: 0;
+    margin-top: 2px;
+  }
+  .live-stat .val.danger { color: #D4A373; }
+
+  /* ========== SECTIONS GENERAL ========== */
+  section {
+    padding: 36px 0;
+    border-bottom: 3px solid #4A3525;
+  }
+  .section-label {
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #556B2F;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: clamp(22px, 4vw, 38px);
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    color: #4A3525;
+    margin-bottom: 20px;
+  }
+
+  /* ========== SERVIZI ========== */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 680px) { .services-grid { grid-template-columns: 1fr; } }
+
+  .service-block {
+    background: #fff8ee;
+    border: 3px solid #4A3525;
+    box-shadow: 6px 6px 0px #4A3525;
+    padding: 22px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .service-block h3 {
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: #4A3525;
+    border-bottom: 2px solid #556B2F;
+    padding-bottom: 8px;
+  }
+  .service-block p {
+    font-size: 12.5px;
+    color: #2B1E14;
+    flex: 1;
+  }
+  .service-icon {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  /* ========== BUTTONS ========== */
+  .btn {
+    display: inline-block;
+    background: #6A8296;
+    color: #E8DCC4;
+    border: 3px solid #4A3525;
+    box-shadow: 4px 4px 0px #4A3525;
+    padding: 9px 18px;
+    font-family: "Verdana", sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+  }
+  .btn:hover { background: #D4A373; color: #2B1E14; box-shadow: 2px 2px 0px #4A3525; }
+  .btn:active { box-shadow: 0px 0px 0px #4A3525; transform: translate(4px, 4px); }
+  .btn.danger-btn { background: #4A3525; color: #D4A373; }
+  .btn.danger-btn:hover { background: #D4A373; color: #2B1E14; }
+
+  /* ========== POPUP OVERLAY ========== */
+  #popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(44,30,20,0.72);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+  #popup-overlay.show { display: flex; }
+  #popup-box {
+    background: #E8DCC4;
+    border: 4px solid #4A3525;
+    box-shadow: 10px 10px 0px #2B1E14;
+    padding: 30px 32px 24px;
+    max-width: 420px;
+    width: 90%;
+    position: relative;
+  }
+  #popup-box h4 {
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: #4A3525;
+    margin-bottom: 10px;
+  }
+  #popup-box p { font-size: 13px; color: #2B1E14; margin-bottom: 18px; }
+  #popup-close {
+    position: absolute;
+    top: 10px; right: 12px;
+    background: none;
+    border: 2px solid #4A3525;
+    color: #4A3525;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    width: 30px; height: 30px;
+    line-height: 26px;
+    text-align: center;
+  }
+  #popup-close:hover { background: #4A3525; color: #E8DCC4; }
+
+  /* ========== POLIZIA PANEL ========== */
+  .polizia-panel {
+    background: #2B1E14;
+    border: 3px solid #4A3525;
+    box-shadow: 6px 6px 0px #556B2F;
+    padding: 24px;
+    margin-top: 20px;
+  }
+  .polizia-panel h3 {
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: 20px;
+    color: #D4A373;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+  .danger-meter {
+    height: 28px;
+    background: #4A3525;
+    border: 2px solid #D4A373;
+    margin: 12px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #danger-fill {
+    height: 100%;
+    width: 0%;
+    background: #D4A373;
+    transition: none;
+  }
+  #danger-label {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #E8DCC4;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+  .polizia-log {
+    background: #1a100a;
+    border: 2px solid #556B2F;
+    padding: 10px 14px;
+    margin-top: 12px;
+    font-family: "Verdana", monospace;
+    font-size: 11px;
+    color: #556B2F;
+    min-height: 60px;
+    max-height: 100px;
+    overflow-y: auto;
+  }
+  .polizia-log p { margin-bottom: 3px; }
+  .polizia-log p.alert { color: #D4A373; }
+
+  /* ========== METODO / BLOG ========== */
+  .blog-block {
+    background: #fff8ee;
+    border: 3px solid #4A3525;
+    box-shadow: 7px 7px 0px #4A3525;
+    padding: 28px;
+  }
+  .blog-meta {
+    font-size: 11px;
+    color: #556B2F;
+    font-family: "Verdana", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px dotted #4A3525;
+  }
+  .blog-block p {
+    font-size: 13px;
+    color: #2B1E14;
+    margin-bottom: 12px;
+    text-align: left;
+  }
+  .blog-block p strong {
+    font-weight: bold;
+    color: #4A3525;
+  }
+
+  /* ========== TASSO ALCOLICO COUNTER ========== */
+  .tasso-section {
+    background: #4A3525;
+    border: 3px solid #D4A373;
+    box-shadow: 6px 6px 0px #2B1E14;
+    padding: 22px 24px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .tasso-display {
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: 52px;
+    color: #D4A373;
+    letter-spacing: -2px;
+    line-height: 1;
+    min-width: 130px;
+    text-align: center;
+  }
+  .tasso-display small {
+    display: block;
+    font-size: 13px;
+    color: #E8DCC4;
+    letter-spacing: 1px;
+    font-family: "Verdana", sans-serif;
+  }
+  .tasso-info {
+    flex: 1;
+    min-width: 200px;
+  }
+  .tasso-info p {
+    font-size: 12px;
+    color: #D4A373;
+    margin-bottom: 8px;
+  }
+  .tasso-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: #2B1E14;
+    color: #E8DCC4;
+    padding: 22px 0;
+    border-top: 4px solid #4A3525;
+    font-size: 11px;
+    font-family: "Verdana", sans-serif;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 1.8;
+  }
+  footer strong { color: #D4A373; }
+
+  /* ========== IMBUCATI COUNTER ========== */
+  .imbucati-badge {
+    display: inline-block;
+    background: #556B2F;
+    color: #E8DCC4;
+    border: 3px solid #4A3525;
+    box-shadow: 4px 4px 0px #2B1E14;
+    padding: 6px 16px;
+    font-family: "Impact", "Arial Black", sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 14px;
+    cursor: pointer;
+  }
+  .imbucati-badge:hover { background: #D4A373; color: #2B1E14; }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div id="ticker-bar">
+  <span id="ticker-inner">⚠ ATTENZIONE: Evento RISERVATO AI MAGGIORI DI 18 ANNI &nbsp;▪&nbsp; Tasso alcolico medio in sala: aggiornamento in corso &nbsp;▪&nbsp; Nessun genitore è stato avvisato &nbsp;▪&nbsp; Il portiere non accetta scuse &nbsp;▪&nbsp; Mantova Swag declina ogni responsabilità per cappotti scomparsi, ex fidanzati imbucati e danni collaterali al fegato &nbsp;▪&nbsp; SE VEDI LE LUCI BLU: USCITA DI EMERGENZA A DESTRA &nbsp;▪&nbsp;</span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="page-wrap">
+    <div class="header-tag">▶ Solo per maggiorenni // Est. periferia</div>
+    <h1>MANTOVA SWAG<br><span>// Feste Leggendarie</span></h1>
+    <p class="subheader">L'ultima notte di lucidità prima del collasso totale. Organizziamo l'evento definitivo per maggiorenni disperati nella tua zona di periferia.</p>
+
+    <!-- LIVE STATS -->
+    <div class="live-bar">
+      <div class="live-stat">
+        Tasso alcolico sala (g/L)
+        <span class="val danger" id="stat-tasso">0.00</span>
+      </div>
+      <div class="live-stat">
+        Imbucati rilevati
+        <span class="val" id="stat-imbucati">0</span>
+      </div>
+      <div class="live-stat">
+        Lucidi presenti
+        <span class="val" id="stat-lucidi">--</span>
+      </div>
+      <div class="live-stat">
+        Ora stimata collasso
+        <span class="val" id="stat-collasso">??:??</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- POPUP OVERLAY -->
+<div id="popup-overlay">
+  <div id="popup-box">
+    <button id="popup-close" onclick="closePopup()">✕</button>
+    <h4 id="popup-title">Titolo</h4>
+    <p id="popup-body">Testo popup</p>
+    <button class="btn" onclick="closePopup()">Ho capito, vado avanti lo stesso</button>
+  </div>
+</div>
+
+<!-- SEZIONE SERVIZI -->
+<section>
+  <div class="page-wrap">
+    <div class="section-label">▶ Cosa offriamo</div>
+    <h2>I Nostri Servizi</h2>
+    <div class="services-grid">
+
+      <div class="service-block">
+        <div class="service-icon">🍺</div>
+        <h3>Open Bar Totalizzante</h3>
+        <p>Cocktail ricaricati senza pietà, birra calda servita nei bicchieri di plastica che nessuno ha lavato da stamattina, liquori di importazione dubbia e almeno tre casse di vino da osteria. Niente posturing da cocktail bar del centro: qui si beve sul serio, fino a quando anche il muro ti sembra simpatico e inizi a raccontare a degli sconosciuti i tuoi problemi con il professore di economia. L'open bar non chiude finché regge la cassa e regge la schiena del barman.</p>
+        <button class="btn" onclick="showPopup('openbar')">Prenota l'Open Bar</button>
+      </div>
+
+      <div class="service-block">
+        <div class="service-icon">🚐</div>
+        <h3>Navetta Anti-Ritiro Patente</h3>
+        <p>Servizio di trasporto collettivo tra capannoni, magazzini e seminterrati abbandonati della provincia, pensato appositamente per chi ha ancora dei punti sulla patente e vuole tenerli. Macchina lasciata a casa, tu in navetta, il portafoglio salvo (almeno quello: per il fegato non promettiamo niente). Niente autostop alle tre di notte sulla provinciale, niente occhi rossi al posto di blocco, niente telefonate imbarazzanti ai genitori alle quattro per farti venire a prendere.</p>
+        <button class="btn" onclick="showPopup('navetta')">Prenota la Navetta</button>
+      </div>
+
+      <div class="service-block">
+        <div class="service-icon">🔊</div>
+        <h3>Soundtrack: Solo Grandi Hit</h3>
+        <p>Nessuna concessione alle ultime tendenze da playlist algoritmiche. Selezione musicale rigorosamente curata dal nostro responsabile audio (che ha smesso il liceo con tre anni di ritardo e per questo sa esattamente cosa suonare). Il meglio del pop muscolare, dell'hip-hop vecchio stile e dell'indie-rock più sgangherato e nostalgico. La gente balla o la gente se ne va: non esistono opzioni intermedie. Nessuna canzone che hai sentito in un centro commerciale negli ultimi sei mesi.</p>
+        <button class="btn" onclick="showPopup('musica')">Dettagli Soundtrack</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SEZIONE POLIZIA / DANGER METER -->
+<section>
+  <div class="page-wrap">
+    <div class="section-label">▶ Monitoraggio zona</div>
+    <h2>Stato Volanti nella Zona</h2>
+    <p style="margin-bottom:0; font-size:13px;">Aggiornamento in tempo reale della situazione operativa nelle immediate vicinanze. Premi il pulsante per ricevere l'ultimo aggiornamento dal campo.</p>
+
+    <div class="polizia-panel">
+      <h3>⚠ Pannello Allerta Pattuglie</h3>
+      <div class="danger-meter">
+        <div id="danger-fill"></div>
+        <span id="danger-label">Premi per aggiornare</span>
+      </div>
+      <button class="btn danger-btn" onclick="updateDanger()">▶ AGGIORNA SITUAZIONE VOLANTI</button>
+      <div class="polizia-log" id="polizia-log">
+        <p>// In attesa di aggiornamento...</p>
+      </div>
+    </div>
+
+    <div class="tasso-section">
+      <div class="tasso-display">
+        <span id="tasso-big">0.00</span>
+        <small>g/L medio in sala</small>
+      </div>
+      <div class="tasso-info">
+        <p><strong style="color:#E8DCC4;">Tasso Alcolico Stimato della Sala</strong><br>
+        Aggiornamento in tempo reale. Il dato è puramente satirico e non costituisce misurazione medica. Se sei sober in questo momento sei statisticamente una rarità. Congratulazioni.</p>
+        <div class="tasso-buttons">
+          <button class="btn" style="width:auto; background:#556B2F;" onclick="addDrink()">+ Drink</button>
+          <button class="btn" style="width:auto; background:#6A8296;" onclick="removeDrink()">– Drink</button>
+        </div>
+      </div>
+      <div id="imbucati-badge" class="imbucati-badge" onclick="addImbucato()">
+        👀 <span id="imbucati-count">0</span> IMBUCATI SEGNALATI
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEZIONE METODO / BLOG -->
+<section>
+  <div class="page-wrap">
+    <div class="section-label">▶ Il nostro approccio</div>
+    <h2>Il Nostro Metodo</h2>
+    <div class="blog-block">
+      <div class="blog-meta">Post #47 // Categoria: Logistica del Caos // Autore: il Responsabile Operativo (fuori corso da tre anni)</div>
+      <p>Ok, sentiamo. Ogni volta che organizziamo una festa c'è <strong>quel momento</strong> — arriva sempre, puntuale come il mal di testa il giorno dopo — in cui ti giri e vedi trentadue persone con gli occhi fissi sullo schermo del telefono, tutte in piedi vicino al muro, che non si muovono, non parlano, non fanno niente. Quello è il fallimento totale. Quello è esattamente quello che noi vogliamo evitare. Per questo esiste il Metodo.</p>
+      <p><strong>Fase 1: La Densità Corretta.</strong> Una festa riuscita ha una densità di persone precisa: abbastanza da creare quel caldo umano sgradevole che fa sudare anche chi non si muove, non così tanta da non riuscire ad arrivare al bagno. Troppa gente e diventa un ammasso informe. Troppo poca e sembra un aperitivo aziendale andato male. Noi sappiamo calibrare. Abbiamo sbagliato almeno dodici volte prima di capirlo.</p>
+      <p><strong>Fase 2: L'Architettura del Flusso.</strong> Le persone devono muoversi. Non restare ferme. Il bar non può essere nello stesso angolo del frigo delle birre, il frigo non può stare vicino all'uscita, l'uscita non deve essere ovvia. Ci vuole una piccola dose di disorientamento strutturale. Abbastanza da far circolare la gente, non abbastanza da mandare qualcuno in crisi d'ansia nel bagno per quaranta minuti.</p>
+      <p><strong>Fase 3: Nessuno resta sobrio per scelta propria.</strong> Questa è la verità scomoda. Se la gente rimane lucida, inizia a giudicare. Inizia a guardare il telefono. Inizia a pensare agli esami, al professore, al canone di locazione non pagato. L'open bar non è una scusa per bere: è una infrastruttura sociale. Un sistema di facilitazione delle interazioni umane tra persone che altrimenti non si rivolgerebbero la parola neanche con una pistola puntata alla tempia.</p>
+      <p><strong>Fase 4: Il Piano di Uscita.</strong> Ogni grande evento ha bisogno di una exit strategy. Non per gli organizzatori — per gli ospiti. La navetta è parte integrante del metodo. Se la gente sa come tornare a casa senza svegliarsi la mattina in una situazione imbarazzante (o su un binario della ferrovia, o seduti su un muretto davanti a un'officina chiusa alle cinque del mattino), si rilassa, beve, balla, e ringrazia. La festa perfetta finisce con tutti interi. Stanchi. Forse con qualche rimpianto. Ma interi.</p>
+      <p><strong>Nota finale:</strong> Questo post era pensato per essere di cinquecento parole. Ha superato le mille. Non ho sonno, ho ancora il caffè di stamattina in corpo e fuori piove. Questa è la provincia. Questo è il Metodo. Prenotatevi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="page-wrap">
+    <p>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+    <p style="margin: 12px 0;"><strong>Se vedi le luci blu, scappa dal retro.</strong></p>
+    <p>Riservato ai maggiori di 18 anni. &nbsp;|&nbsp; <strong>Mantova Swag</strong> — Tutti i diritti riservati.</p>
+    <p style="margin-top:10px; color:#556B2F; font-size:10px;">Nessun animale è stato maltrattato nella realizzazione di questo sito. Il responsabile tecnico stava ancora scrivendo il CSS alle tre di notte.</p>
+  </div>
+</footer>
+
+<script>
+  // ========== POPUP DATA ==========
+  const popups = {
+    openbar: {
+      title: "OPEN BAR TOTALIZZANTE",
+      body: "Confermando la prenotazione dichiari di avere più di 18 anni, di essere consapevole che il giorno dopo non ricorderai le tue stesse opinioni, e di aver avvisato almeno un contatto di emergenza. Il barman non è responsabile di quello che ti racconta dopo il quarto drink. Neanche tu lo sei, a quel punto."
+    },
+    navetta: {
+      title: "NAVETTA ANTI-RITIRO PATENTE",
+      body: "La navetta parte puntuale. Non aspetta. Non manda messaggi. Se arrivi in ritardo al punto di raccolta, la navetta se n'è già andata e tu sei solo, sul ciglio di una strada provinciale, alle due di notte, con il telefono al 4% di batteria. Questo è il regolamento. Accetti o non accetti."
+    },
+    musica: {
+      title: "SOUNDTRACK: SOLO GRANDI HIT",
+      body: "Il nostro responsabile audio non accetta richieste. Ne ha accettata una una volta, era per il compleanno della cognata di qualcuno, e ancora oggi se ne rammarica profondamente. La selezione musicale è intoccabile. È la colonna vertebrale della serata. È l'unica cosa che funziona davvero. Non toccarla."
+    }
+  };
+
+  function showPopup(type) {
+    const d = popups[type];
+    document.getElementById('popup-title').textContent = d.title;
+    document.getElementById('popup-body').textContent = d.body;
+    document.getElementById('popup-overlay').classList.add('show');
+  }
+  function closePopup() {
+    document.getElementById('popup-overlay').classList.remove('show');
+  }
+  document.getElementById('popup-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+  });
+
+  // ========== DRINK / TASSO COUNTER ==========
+  let drinkCount = Math.floor(Math.random() * 40) + 20;
+  let guestCount = Math.floor(Math.random() * 30) + 60;
+
+  function calcTasso() {
+    return (drinkCount / guestCount * 0.18).toFixed(2);
+  }
+  function updateTassoDisplay() {
+    const t = calcTasso();
+    document.getElementById('tasso-big').textContent = t;
+    document.getElementById('stat-tasso').textContent = t;
+  }
+  function addDrink() {
+    drinkCount += Math.floor(Math.random() * 3) + 1;
+    updateTassoDisplay();
+  }
+  function removeDrink() {
+    if (drinkCount > 0) drinkCount = Math.max(0, drinkCount - 1);
+    updateTassoDisplay();
+  }
+  updateTassoDisplay();
+
+  // Auto-increment drinks slowly
+  setInterval(function() {
+    if (Math.random() < 0.6) {
+      drinkCount += Math.floor(Math.random() * 2) + 1;
+      updateTassoDisplay();
+    }
+  }, 4200);
+
+  // ========== IMBUCATI COUNTER ==========
+  let imbucati = 0;
+  function addImbucato() {
+    imbucati++;
+    document.getElementById('imbucati-count').textContent = imbucati;
+    document.getElementById('stat-imbucati').textContent = imbucati;
+    if (imbucati >= 5) {
+      document.getElementById('imbucati-badge').style.background = '#4A3525';
+    }
+  }
+
+  // Auto add imbucati randomly
+  setInterval(function() {
+    if (Math.random() < 0.2) {
+      imbucati++;
+      document.getElementById('imbucati-count').textContent = imbucati;
+      document.getElementById('stat-imbucati').textContent = imbucati;
+    }
+  }, 7000);
+
+  // ========== LUCIDI / COLLASSO ==========
+  function updateLucidi() {
+    const lucidi = Math.max(0, guestCount - Math.floor(drinkCount * 0.4));
+    document.getElementById('stat-lucidi').textContent = lucidi;
+    const colH = 2 + Math.floor(Math.random() * 4); // 02–05
+    const colM = Math.floor(Math.random() * 60);
+    document.getElementById('stat-collasso').textContent =
+      String(colH).padStart(2,'0') + ':' + String(colM).padStart(2,'0');
+  }
+  updateLucidi();
+  setInterval(updateLucidi, 8000);
+
+  // ========== DANGER METER ==========
+  const dangerMessages = [
+    { level: 8, text: "Pattuglia segnalata in via Industriale. Probabilmente controllano il parcheggio del distributore. Situazione sotto controllo." },
+    { level: 22, text: "Due volanti in zona. Fermate di routine sulla provinciale. Nessun avvicinamento diretto. Mantieni la calma." },
+    { level: 45, text: "ATTENZIONE: Controllo alcoltest segnalato all'incrocio vicino alla rotonda. Usa la navetta o aspetta." },
+    { level: 67, text: "ALLERTA MEDIA: Pattuglia in parcheggio adiacente. Non uscire a piedi con qualcosa in mano. Resta dentro." },
+    { level: 83, text: "ALLERTA ALTA: Tre volanti in zona. Segnalazione anonima da qualcuno che non sai chi è ma che odi già. USATE IL RETRO." },
+    { level: 97, text: "SITUAZIONE CRITICA: Operazione in corso. Luci blu confermate. USCITA DI EMERGENZA. Abbandona la bevanda. Cammina normale. VAI." },
+  ];
+  let dangerIndex = 0;
+  const logEl = document.getElementById('polizia-log');
+
+  function updateDanger() {
+    const entry = dangerMessages[dangerIndex % dangerMessages.length];
+    dangerIndex++;
+    const fill = document.getElementById('danger-fill');
+    const label = document.getElementById('danger-label');
+    fill.style.width = entry.level + '%';
+    if (entry.level < 30) {
+      fill.style.background = '#556B2F';
+      label.textContent = 'ZONA TRANQUILLA — ' + entry.level + '% RISCHIO';
+    } else if (entry.level < 60) {
+      fill.style.background = '#D4A373';
+      label.textContent = 'ATTENZIONE — ' + entry.level + '% RISCHIO';
+    } else {
+      fill.style.background = '#8B2020';
+      label.textContent = '⚠ PERICOLO — ' + entry.level + '% RISCHIO';
+    }
+    const now = new Date();
+    const ts = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+    const p = document.createElement('p');
+    if (entry.level >= 60) p.classList.add('alert');
+    p.textContent = '[' + ts + '] ' + entry.text;
+    logEl.insertBefore(p, logEl.firstChild);
+    if (logEl.children.length > 6) logEl.removeChild(logEl.lastChild);
+  }
+</script>
+</body>
+</html>
